@@ -7,6 +7,9 @@ med=datacard.split("_")[-3]
 
 mchi=datacard.split("_")[-1].split(".")[0]
 
+model=datacard.split("_")[-5]
+
+
 logfile = "log_"+med+"_"+mchi+".del"
 command_  = "combine -M Asymptotic --rAbsAcc 0 --rMax 30 -t -1 "+ datacard + " >> " + logfile
 
@@ -31,10 +34,11 @@ for ilongline in open(logfile):
     if "Expected 97.5%: r < " in ilongline:
         expected975_ = ilongline.replace("Expected 97.5%: r < ","").rstrip()
 
-towrite =  med+" "+mchi+" "+expected25_+" "+expected16_+" "+ expected50_+" "+ expected84_+" "+ expected975_+" "+ observed_
+towrite =  med+" "+mchi+" "+expected25_+" "+expected16_+" "+ expected50_+" "+ expected84_+" "+ expected975_+" "+ observed_+"\n"
 
 print towrite
-fout = open('bin/limits_bbDM2016.txt','w')
+outfile = 'bin/limits_bbDM2016'+model+'.txt'
+fout = open(outfile,'a')
 fout.write(towrite)
 
 

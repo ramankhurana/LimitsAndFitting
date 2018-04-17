@@ -1,6 +1,9 @@
 import sys 
 import os 
 
+os.system('rm bin/limits_bbDM2016scalar.txt')
+os.system('rm bin/limits_bbDM2016pseudo.txt')
+
 def createAndrunSetup(signalStr):
     fout = open('datacard_bbDM_2016_'+signalStr+'.txt', 'w')
     
@@ -19,5 +22,5 @@ if len(sys.argv) > 1:
     if sys.argv[1]=='run':
         for sig in signal_:
             datacardname = 'datacard_bbDM_2016_'+sig+'.txt'
-            command_ = 'combine -M Asymptotic '+datacardname
+            command_ = 'python scan.py '+datacardname
             os.system(command_)
