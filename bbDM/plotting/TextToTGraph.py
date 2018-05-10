@@ -33,11 +33,11 @@ for inputstring in inputstring_:
         
         med.append(float(line.rstrip().split()[0]))
         mchi.append(float(line.rstrip().split()[1]))
-        expm2.append(float(line.rstrip().split()[2])/xsec_)
-        expm1.append(float(line.rstrip().split()[3])/xsec_)
+        expm2.append(float(line.rstrip().split()[4])/xsec_-float(line.rstrip().split()[2])/xsec_)
+        expm1.append(float(line.rstrip().split()[4])/xsec_-float(line.rstrip().split()[3])/xsec_)
         expmed.append(float(line.rstrip().split()[4])/xsec_)
-        expp1.append(float(line.rstrip().split()[5])/xsec_)
-        expp2.append(float(line.rstrip().split()[6])/xsec_)
+        expp1.append(float(line.rstrip().split()[5])/xsec_-float(line.rstrip().split()[4])/xsec_)
+        expp2.append(float(line.rstrip().split()[6])/xsec_-float(line.rstrip().split()[4])/xsec_)
         obs.append(float(line.rstrip().split()[7])/xsec_)
         errx.append(0.0)
         print masspointstr, float(line.rstrip().split()[3]), xsec_, float(line.rstrip().split()[3])/xsec_
