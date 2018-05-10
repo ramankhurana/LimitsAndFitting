@@ -4,8 +4,10 @@ from ROOT import *
 
 gStyle.SetOptTitle(0)
 gStyle.SetOptStat(0)
+gROOT.SetBatch(1)
 
-c = TCanvas()
+c = TCanvas("c","c",1500, 950)
+
 c.SetLogy(1)
 c.SetLogx(1)
 c.SetGridx(1)
@@ -30,10 +32,12 @@ exp2s.SetMarkerSize(1.1)
 exp2s.SetLineWidth(2)
 exp2s.SetFillColor(kYellow);
 exp2s.SetLineColor(kYellow)
-exp2s.GetXaxis().SetRangeUser(0,1000)
-exp2s.GetYaxis().SetRangeUser(1,1000000)
+exp2s.GetXaxis().SetRangeUser(0,1200)
+#exp2s.GetYaxis().SetRangeUser(10,100000)
 exp2s.GetXaxis().SetTitle("M_{#phi} [GeV]");
+exp2s.GetXaxis().SetTitleOffset(1.4)
 exp2s.GetYaxis().SetTitle("#sigma/#sigma_{th}"); 
+exp2s.GetYaxis().SetTitleOffset(1.2)
 exp2s.GetYaxis().SetNdivisions(505);
 exp2s.GetXaxis().SetNdivisions(505);
 exp2s.GetYaxis().SetMoreLogLabels()
@@ -49,17 +53,19 @@ exp1s.SetLineColor(kGreen)
 exp1s.Draw("3 same")
 
 exp =  f.Get("expmed")
-exp.SetMarkerStyle(20)
+exp.SetMarkerStyle(1)
 exp.SetMarkerSize(1.1)
 exp.SetLineWidth(3)
 exp.Draw("L same")
 
 obs =  f.Get("obs")
 obs.SetMarkerStyle(20)
+#obs.SetMarkerColor(4)
 obs.SetMarkerSize(1.1)
+#obs.SetLineColor(2)
 obs.SetLineWidth(3)
-obs.SetLineStyle(2)
-obs.Draw("L same")
+obs.SetLineStyle(9)
+obs.Draw("P same")
 
 #hr = c.DrawFrame(fr_left, fr_down, fr_right, fr_up, "");
 #hr.SetXTitle("M_{Z'} [GeV]");
