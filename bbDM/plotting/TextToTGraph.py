@@ -26,11 +26,11 @@ for inputstring in inputstring_:
     expp2=array('f')
     obs=array('f')
     errx=array('f')
+    
     for line in f:
         
         masspointstr = 'NLO_'+inputstring+'_mphi_'+line.rstrip().split()[0]+'_mchi_'+line.rstrip().split()[1]
         xsec_ = float(xsec_dict[masspointstr] )
-        
         med.append(float(line.rstrip().split()[0]))
         mchi.append(float(line.rstrip().split()[1]))
         expm2.append(float(line.rstrip().split()[2])/xsec_)
@@ -40,14 +40,36 @@ for inputstring in inputstring_:
         expp2.append(float(line.rstrip().split()[6])/xsec_)
         obs.append(float(line.rstrip().split()[7])/xsec_)
         errx.append(0.0)
+        
+        
         print masspointstr, float(line.rstrip().split()[3]), xsec_, float(line.rstrip().split()[3])/xsec_
+
         
     g_exp2  = TGraphAsymmErrors(int(len(med)), med, expmed, errx, errx, expm2, expp2 )   ;  g_exp2.SetName("exp2")
     g_exp1  = TGraphAsymmErrors(int(len(med)), med, expmed, errx, errx, expm1, expp1 )   ;  g_exp1.SetName("exp1")
     g_expmed = TGraphAsymmErrors(int(len(med)), med, expmed)   ;  g_expmed.SetName("expmed")
     g_obs    = TGraphAsymmErrors(int(len(med)), med, obs   )   ;  g_obs.SetName("obs")
+    
+    
 
+    print med
+    print expm2
+    print expm1
+    print expmed
+    print expp1
+    print expp2
 
+    print g_expm2.GetErrorYhigh(1)
+    print g_expm2.GetErrorYlow(1)
+    
+    print g_expp2.GetErrorYhigh(1)
+    print g_expp2.GetErrorYlow(1)
+
+    print g_expm1.GetErrorYhigh(1)
+    print g_expm1.GetErrorYlow(1)
+    
+    print g_expp1.GetErrorYhigh(1)
+    print g_expp1.GetErrorYlow(1)
 #g_expm2  = TGraphAsymmErrors(int(len(med)), med, expm2 )   ;  g_expm2.SetName("expm2")
 #g_expm1  = TGraphAsymmErrors(int(len(med)), med, expm1 )   ;  g_expm1.SetName("expm1")
 #g_expmed = TGraphAsymmErrors(int(len(med)), med, expmed)   ;  g_expmed.SetName("expmed")
