@@ -74,6 +74,7 @@ def get_contours(h2, cold):
   return graphs
 
 L = namedtuple('L', ['mMed','mChi','down2','down1','cent','up1','up2','obs'])
+#L = namedtuple('L', ['mChi','mMed','down2','down1','cent','up1','up2','obs'])
 
 def parseLimitFiles2D(filepath):
   # returns a dict (mMed,mChi) : Limit
@@ -96,7 +97,8 @@ def makePlot2D(filepath,foutname,medcfg,chicfg,header='',offshell=False):
   iP=0
   hgrid = TH2D('grid','grid',medcfg[0],medcfg[1],medcfg[2],chicfg[0],chicfg[1],chicfg[2])
   for p in limits:
-    mMed = p[0]; mChi = p[1]
+#    mMed = p[0]; mChi = p[1]
+    mMed = p[1]; mChi = p[0]
     l = limits[p]
     if l.obs==0 or l.cent==0:
       print mMed,mChi
@@ -149,9 +151,11 @@ def makePlot2D(filepath,foutname,medcfg,chicfg,header='',offshell=False):
 
   frame.GetYaxis().CenterTitle();
   #frame.GetYaxis().SetTitle("m_{A} [TeV]");
-  if options.thdm: frame.GetYaxis().SetTitle("m_{A} (TeV/c^{2})");
+  if options.thdm: frame.GetYaxis().SetTitle("m_{A} (GeV)");
+  if options.bbdm: frame.GetYaxis().SetTitle("m_{H4} (GeV)");
   if options.zpb:  frame.GetYaxis().SetTitle("m_{#chi} (TeV/c^{2})");
   frame.GetXaxis().SetTitle("m_{Z'} (TeV/c^{2})");
+  if options.bbdm: frame.GetXaxis().SetTitle("tan#beta (GeV)");
   frame.GetXaxis().SetTitleOffset(1.15);
   frame.GetYaxis().SetTitleOffset(1.15);
 #  frame.GetXaxis().SetNdivisions(5)
@@ -355,4 +359,5 @@ if options.zpb:
 
 #makePlot2D('/afs/cern.ch/work/k/khurana/monoHSignalProduction/genproductions/bin/MadGraph5_aMCatNLO/testgridpack/CMSSW_7_4_5/src/MonoHCombination/bin/limits_2hdm_combo_xs_scaled.txt',plotsdir+'/test',(100,0.601,3.5),(100,0.301,0.810),'Test',True)
 if options.bbdm:
-  makePlot2D('alllimits_tanB.txt',plotsdir+'/limit2d_bbDM_',(100,50.,500.0),(100,0.1,50.),'2HDM+a',True)
+  makePlot2D('alllimits_tanB.txt',plotsdir+'/limit2d_bbDM_',(100,0.1,50.),(100,50.,500.0),'2HDM+a',True)
+  #makePlot2D('alllimits_tanB.txt',plotsdir+'/limit2d_bbDM_',(100,50.,500.0),(100,0.1,50.),'2HDM+a',True)
